@@ -1,0 +1,13 @@
+// Basic types.
+
+syntax = "proto2";
+
+// TODO(piotrf): support for approximate dates
+message Date {
+  optional int32 year = 1;
+  optional int32 month = 2;
+  optional int32 day = 3;
+}
+
+message Location {
+}

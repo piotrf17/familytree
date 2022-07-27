@@ -1,0 +1,42 @@
+syntax = "proto2";
+
+import "proto/base.proto";
+
+message Name {
+  // Representing names by first, middle, last is not a great way to generically
+  // store names around the world, but is good enough for just our family.
+  optional string first = 1;
+  optional string middle = 2;
+  optional string last = 3;
+
+  enum Type {
+    BIRTH = 0;
+    MARRIAGE = 1;
+  }
+}
+
+message Event {
+  optional Date date = 1;
+  optional Location location = 2;
+
+  message BirthEvent {}
+  message MarriageEvent {}
+  message DeathEvent {}
+  
+  oneof data {
+    BirthEvent birth = 3;
+    MarriageEvent marriage = 4;
+    DeathEvent death = 5;
+  }
+}
+
+message Person {
+  // Unique identifier for this person.
+  optional uint64 id = 1;
+
+  // List of legal names associated with this person.
+  repeated Name names = 2;
+
+  // Events associated with this person, e.g. birth, death, marriage, etc.
+  repeated Event events = 3;
+}
